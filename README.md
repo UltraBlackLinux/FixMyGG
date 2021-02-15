@@ -5,7 +5,7 @@ __This mod is compatible with any Version of Fabric!__
 
 # Demo
 Typing "hgg", "hgg3456" and similars, will trigger FixMyGG.
-![](https://imgur.com/UoYjhv8)
+![](https://i.imgur.com/UoYjhv8.gif)
 
 
 # License
