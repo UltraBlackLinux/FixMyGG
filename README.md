@@ -8,6 +8,7 @@ __This mod is compatible with any Version of Fabric!__
 Typing "hgg", "hgg3456" and similars, will trigger FixMyGG.
 
 Currently supported shortcuts: gf, gg, gp
+
 ![](https://i.imgur.com/UoYjhv8.gif)
 
 
