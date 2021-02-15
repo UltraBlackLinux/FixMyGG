@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fixmygg",
+  "version": "${version}",
+  "name": "FixMyGG",
+  "description": "Fixes typo-ggs",
+  "authors": [
+    "UltraBlackLinux"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/FixGG/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.ultrablacklinux.fixgg.client.FixGGClient"
+    ],
+    "main": [
+      "me.ultrablacklinux.fixgg.FixGG"
+    ]
+  },
+  "mixins": [
+    "FixGG.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.1",
+    "fabric": "*",
+    "minecraft": "*"
+  }
+}
