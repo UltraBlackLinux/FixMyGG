@@ -10,7 +10,3 @@ Typing "hgg", "hgg3456" and similars, will trigger FixMyGG.
 Currently supported shortcuts: gf, gg, gp
 
 ![](https://i.imgur.com/UoYjhv8.gif)
-
-
-# License
-You can include this anywhere, I want to be mentioned though
