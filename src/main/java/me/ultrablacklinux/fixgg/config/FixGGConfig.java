@@ -27,9 +27,11 @@ public class FixGGConfig extends PartitioningSerializer.GlobalData {
     @Config(name = "general")
     public static class General implements ConfigData {
         @Comment("Words to check for typos. They mustn't contain themselves.")
-        public String words = "gg gf gp";
+        public String words = "gg;gf;gp";
         @Comment("Max amount of characters to be in front of the words.")
         public int index = 3;
+        @Comment("Max amount of characters in the message part.")
+        public int length = 6;
         @Comment("Toggle the notification")
         public boolean message = true;
     }

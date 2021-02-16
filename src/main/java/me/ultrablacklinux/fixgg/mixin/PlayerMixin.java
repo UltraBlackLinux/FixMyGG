@@ -23,20 +23,17 @@ public abstract class PlayerMixin {
 
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(String fmsg, CallbackInfo info) {
-        //important values
-        //String[] words = new String[] {"gf", "gg", "gp"};
-        String[] words = FixGGConfig.get().general.words.split(" ");
+        String[] words = FixGGConfig.get().general.words.split(";");
         boolean showMessage = FixGGConfig.get().general.message;
         int maxIndex = FixGGConfig.get().general.index;
-        //important values
-
+        int maxLength = FixGGConfig.get().general.length;
         String[] msg = fmsg.split(" ");
         Boolean changed = false;
 
         for (String checkWord : words) { //check, if word exists
             for (int currentLocation = 0; currentLocation < msg.length; currentLocation++) {
                 if (msg[currentLocation].toLowerCase().contains(checkWord) && !msg[currentLocation].toLowerCase().matches(checkWord)) {
-                    if (msg[currentLocation].length() <= maxIndex) {
+                    if (msg[currentLocation].indexOf(checkWord) <= maxIndex + 1 && msg[currentLocation].length() <= maxLength) {
                         changed = true;
                         if (msg[currentLocation].contains(checkWord.toUpperCase())) {
                             msg[currentLocation] = checkWord.toUpperCase();
