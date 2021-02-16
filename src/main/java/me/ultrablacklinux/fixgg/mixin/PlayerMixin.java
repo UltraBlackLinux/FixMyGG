@@ -1,5 +1,7 @@
 package me.ultrablacklinux.fixgg.mixin;
 
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.ultrablacklinux.fixgg.config.FixGGConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -25,8 +27,10 @@ public abstract class PlayerMixin {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(String fmsg, CallbackInfo info) {
         //important values
-        String[] words = new String[] {"gf", "gg", "gp"};
-        int maxIndex = 3;
+        //String[] words = new String[] {"gf", "gg", "gp"};
+        String[] words = FixGGConfig.get().general.words.split(" ");
+        boolean showMessage = FixGGConfig.get().general.message;
+        int maxIndex = FixGGConfig.get().general.index;
         //important values
 
         String[] msg = fmsg.split(" ");
@@ -47,7 +51,7 @@ public abstract class PlayerMixin {
             }
         }
         if (changed) {
-            client.player.sendMessage(Text.of("Fixed a typo!"), true);
+            if (showMessage) client.player.sendMessage(Text.of("Fixed a typo!"), true);
             this.networkHandler.sendPacket(new ChatMessageC2SPacket(String.join(" ", msg)));
             info.cancel();
             changed = false;

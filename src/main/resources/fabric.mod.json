@@ -17,6 +17,9 @@
     ],
     "main": [
       "me.ultrablacklinux.fixgg.FixGG"
+    ],
+    "modmenu": [
+      "me.ultrablacklinux.fixgg.config.modmenu.ModMenuEntry"
     ]
   },
   "mixins": [
@@ -26,5 +29,21 @@
     "fabricloader": ">=0.11.1",
     "fabric": "*",
     "minecraft": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.issues": "https://github.com/UltraBlackLinux/FixMyGG/issues",
+        "modmenu.sources": "https://github.com/UltraBlackLinux/FixMyGG"
+      },
+      "badges": [ "library", "deprecated" ],
+      "parent": {
+        "id": "fixmygg",
+        "name": "FixMyGG",
+        "description": "Fixes typos in ggs",
+        "icon": "assets/FixGG/icon.png",
+        "badges": [ "client" ]
+      }
+    }
   }
 }
