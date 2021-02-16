@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
+
 @Mixin(ClientPlayerEntity.class)
 public abstract class PlayerMixin {
     @Shadow @Final
@@ -20,21 +22,36 @@ public abstract class PlayerMixin {
     @Shadow @Final
     public ClientPlayNetworkHandler networkHandler;
 
-    @Shadow
-    public abstract void sendMessage(Text text_1, boolean boolean_1);
-
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
-    private void onChatMessage(String msg, CallbackInfo info) {
+    private void onChatMessage(String fmsg, CallbackInfo info) {
+        //important values
+        String[] words = new String[] {"gf", "gg", "gp"};
+        int maxIndex = 3;
+        //important values
 
-        if (msg.toLowerCase().contains("gg") && msg.toLowerCase().indexOf("gg") < 3 && !msg.toLowerCase().matches("gg")) {
-            info.cancel();
-            if (msg.contains("GG")) {
-                this.networkHandler.sendPacket(new ChatMessageC2SPacket("GG"));
+        String[] msg = fmsg.split(" ");
+        Boolean changed = false;
+
+        for (String checkWord : words) { //check, if word exists
+            for (int currentLocation = 0; currentLocation < msg.length; currentLocation++) {
+                if (msg[currentLocation].toLowerCase().contains(checkWord) && !msg[currentLocation].toLowerCase().matches(checkWord)) {
+                    if (msg[currentLocation].length() <= maxIndex) {
+                        changed = true;
+                        if (msg[currentLocation].contains(checkWord.toUpperCase())) {
+                            msg[currentLocation] = checkWord.toUpperCase();
+                        } else if (msg[currentLocation].contains(checkWord.toLowerCase())) {
+                            msg[currentLocation] = checkWord.toLowerCase();
+                        }
+                    }
+                }
             }
-            else if (msg.contains("gg")) {
-                this.networkHandler.sendPacket(new ChatMessageC2SPacket("gg"));
-            }
-            client.player.sendMessage(Text.of("Fixed your gg!"), true);
         }
+        if (changed) {
+            client.player.sendMessage(Text.of("Fixed a typo!"), true);
+            this.networkHandler.sendPacket(new ChatMessageC2SPacket(String.join(" ", msg)));
+            info.cancel();
+            changed = false;
+        }
+
     }
 }

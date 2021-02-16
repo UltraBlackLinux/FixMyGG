@@ -3,7 +3,7 @@
   "id": "fixmygg",
   "version": "${version}",
   "name": "FixMyGG",
-  "description": "Fixes typo-ggs",
+  "description": "Fixes typos in ggs",
   "authors": [
     "UltraBlackLinux"
   ],
