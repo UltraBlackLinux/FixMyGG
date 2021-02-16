@@ -1,6 +1,5 @@
 package me.ultrablacklinux.fixgg.mixin;
 
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.ultrablacklinux.fixgg.config.FixGGConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -13,8 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.ArrayList;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class PlayerMixin {

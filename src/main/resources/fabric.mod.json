@@ -9,7 +9,7 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/FixGG/icon.png",
+  "icon": "assets/fixmygg/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -41,7 +41,7 @@
         "id": "fixmygg",
         "name": "FixMyGG",
         "description": "Fixes typos in ggs",
-        "icon": "assets/FixGG/icon.png",
+        "icon": "assets/fixmygg/icon.png",
         "badges": [ "client" ]
       }
     }

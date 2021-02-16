@@ -1,12 +1,13 @@
 package me.ultrablacklinux.fixgg.config;
 
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
-import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment;
+
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
+import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @SuppressWarnings("unused")
 @Config(name = "fixmygg")
@@ -24,8 +25,7 @@ public class FixGGConfig extends PartitioningSerializer.GlobalData {
     }
 
     @Config(name = "general")
-    public
-    class General implements ConfigData {
+    public static class General implements ConfigData {
         @Comment("Words to check for typos. They mustn't contain themselves.")
         public String words = "gg gf gp";
         @Comment("Max amount of characters to be in front of the words.")
