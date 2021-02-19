@@ -13,7 +13,8 @@ Currently supports:
 
 - AntiKarma
 
+![](https://i.imgur.com/UoYjhv8.gif)
+
+
 # License
 You can include this anywhere, I want to be mentioned though
-- 
-![](https://i.imgur.com/UoYjhv8.gif)
