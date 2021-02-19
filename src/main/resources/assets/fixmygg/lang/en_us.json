@@ -12,6 +12,7 @@
   "text.autoconfig.fixmygg.option.autogg.autoGG": "Enabled",
   "text.autoconfig.fixmygg.option.autogg.strings": "Strings",
   "text.autoconfig.fixmygg.option.autogg.stringsNumber": "Index",
+  "text.autoconfig.fixmygg.option.autogg.finalMsg": "Completion Message",
 
   "text.autoconfig.fixmygg.category.Misc": "Misc",
   "text.autoconfig.fixmygg.option.misc.itemSeparator": "Item Separator",

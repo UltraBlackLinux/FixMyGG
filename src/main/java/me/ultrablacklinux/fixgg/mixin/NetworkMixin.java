@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class NetworkMixin {
@@ -28,21 +27,8 @@ public class NetworkMixin {
     private final Logger FixMyGG_LOGGER = FixGG.getLogger();
     String itemSeperator = Config.get().misc.itemSeparator;
     boolean autoGG = Config.get().autogg.autoGG;
-    private static final String[] ggTriggers = new String[]
-            {"^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
-                    "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
-                    "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|ing Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
-                    "^ +Alpha Infected: \\w+ \\(\\d+ infections?\\)$",
-                    "^ +Murderer: \\w+ \\(\\d+ Kills?\\)$",
-                    "^ +You survived \\d+ rounds!$",
-                    "^ +(?:UHC|SkyWars|The Bridge|Sumo|Classic|OP|MegaWalls|Bow|NoDebuff|Blitz|Combo|Bow Spleef) (?:Duel|Doubles|Teams|Deathmatch|2v2v2v2|3v3v3v3)? ?- \\d+:\\d+$",
-                    "^ +They captured all wools!$",
-                    "^ +Game over!$",
-                    "^ +[\\d\\.]+k?/[\\d\\.]+k? \\w+$",
-                    "^ +(?:Criminal|Cop)s won the game!$",
-                    "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
-                    "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
-                    "^ +. YOUR STATISTICS .$"};
+    String finalMsg = Config.get().autogg.finalMsg;
+    private static final String[] ggTriggers = Config.get().autogg.autoGGRegexPatterns;
     private static final String antikarma = "^\\+(?<karma>\\d)+ Karma!$";
 
     @Inject(method = "onGameMessage", at = @At("HEAD"), cancellable = true)
@@ -67,6 +53,9 @@ public class NetworkMixin {
                     ci.cancel();
                     Config.get().fixMyGG.skipCheck = true;
                     client.player.sendChatMessage(tmp.get(0));
+                    if (!finalMsg.replace(" ", "").equals("")) {
+                        client.player.sendChatMessage(finalMsg);
+                    }
                     Config.get().fixMyGG.skipCheck = false;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected!"), false);

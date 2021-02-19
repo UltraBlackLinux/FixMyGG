@@ -74,6 +74,7 @@ public class Config extends PartitioningSerializer.GlobalData {
 
     @me.shedaniel.autoconfig.annotation.Config(name = "autogg")
     public static class AutoGG implements ConfigData {
+        @Comment("Note: Custom regex patterns can be added via the config")
         public boolean autoGG = true;
         //public String autoGGMsg = "gg";
         @Comment("List of messages, that can be sent")
@@ -81,15 +82,30 @@ public class Config extends PartitioningSerializer.GlobalData {
         public String strings = "Good Game;Good Fight;gg;gf";
         @Comment("The index of the Strings above, or just \"-1\" for a random entry")
         public int stringsNumber = -1;
+        @Comment("Message to be sent after the gg")
+        public String finalMsg = "";
+
+        public String[] autoGGRegexPatterns = {"^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
+                "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
+                "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|ing Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
+                "^ +Alpha Infected: \\w+ \\(\\d+ infections?\\)$",
+                "^ +Murderer: \\w+ \\(\\d+ Kills?\\)$",
+                "^ +You survived \\d+ rounds!$",
+                "^ +(?:UHC|SkyWars|The Bridge|Sumo|Classic|OP|MegaWalls|Bow|NoDebuff|Blitz|Combo|Bow Spleef) (?:Duel|Doubles|Teams|Deathmatch|2v2v2v2|3v3v3v3)? ?- \\d+:\\d+$",
+                "^ +They captured all wools!$",
+                "^ +Game over!$",
+                "^ +[\\d\\.]+k?/[\\d\\.]+k? \\w+$",
+                "^ +(?:Criminal|Cop)s won the game!$",
+                "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
+                "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
+                "^ +. YOUR STATISTICS .$"};
 
         /* If someone knows, how to use multithreading, go ahead, and open a PR!
         @Comment("AutoGG-Message delay in ticks")
         @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
         public int delayTime = 50;
          */
-
-
-    }
+        }
 
     @me.shedaniel.autoconfig.annotation.Config(name = "misc")
     public static class Misc implements ConfigData {
