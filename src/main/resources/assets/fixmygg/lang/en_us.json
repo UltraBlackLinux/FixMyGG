@@ -1,4 +1,6 @@
 {
+  "text.autoconfig.fixmygg.title": "Config",
+
   "text.autoconfig.fixmygg.category.TypoPrevention": "FixMyGG",
   "text.autoconfig.fixmygg.option.fixMyGG.enabled": "Enabled",
   "text.autoconfig.fixmygg.option.fixMyGG.index": "Max Index",
