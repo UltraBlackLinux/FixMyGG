@@ -7,8 +7,11 @@
   "authors": [
     "UltraBlackLinux"
   ],
-  "contact": {},
-  "license": "MIT",
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/fixmygg",
+    "issues": "https://github.com/UltraBlackLinux/FixMyGG/issues"
+  },
+  "license": "GPLv3",
   "icon": "assets/fixmygg/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -28,22 +31,9 @@
   "depends": {
     "fabricloader": ">=0.11.1",
     "fabric": "*",
-    "minecraft": "*"
+    "minecraft": "*",
+    "modmenu": ">=1.16.7"
   },
   "custom": {
-    "modmenu": {
-      "links": {
-        "modmenu.issues": "https://github.com/UltraBlackLinux/FixMyGG/issues",
-        "modmenu.sources": "https://github.com/UltraBlackLinux/FixMyGG"
-      },
-      "badges": [ "library", "deprecated" ],
-      "parent": {
-        "id": "fixmygg",
-        "name": "FixMyGG",
-        "description": "Fixes typos in ggs",
-        "icon": "assets/fixmygg/icon.png",
-        "badges": [ "client" ]
-      }
-    }
   }
 }

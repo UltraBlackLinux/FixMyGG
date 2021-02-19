@@ -1,7 +1,17 @@
 {
-  "text.autoconfig.fixmygg.title": "FixMyGG Config",
-  "text.autoconfig.fixmygg.option.general.words": "Words",
-  "text.autoconfig.fixmygg.option.general.index": "Index",
-  "text.autoconfig.fixmygg.option.general.length": "Length",
-  "text.autoconfig.fixmygg.option.general.message": "Notification"
+  "text.autoconfig.fixmygg.category.TypoPrevention": "FixMyGG",
+  "text.autoconfig.fixmygg.option.fixMyGG.enabled": "Enabled",
+  "text.autoconfig.fixmygg.option.fixMyGG.index": "Max Index",
+  "text.autoconfig.fixmygg.option.fixMyGG.length": "Max Length",
+  "text.autoconfig.fixmygg.option.fixMyGG.message": "Notification Enabled",
+  "text.autoconfig.fixmygg.option.fixMyGG.words": "Words",
+
+  "text.autoconfig.fixmygg.category.AutoGG": "AutoGG",
+  "text.autoconfig.fixmygg.option.autogg.autoGG": "Enabled",
+  "text.autoconfig.fixmygg.option.autogg.strings": "Strings",
+  "text.autoconfig.fixmygg.option.autogg.stringsNumber": "Index",
+
+  "text.autoconfig.fixmygg.category.Misc": "Misc",
+  "text.autoconfig.fixmygg.option.misc.itemSeparator": "Alternate Strings Separator",
+  "text.autoconfig.fixmygg.option.misc.antiKarma": "AntiKarma Enabled"
 }

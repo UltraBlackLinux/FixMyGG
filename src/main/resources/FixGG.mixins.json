@@ -4,6 +4,7 @@
   "package": "me.ultrablacklinux.fixgg.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "NetworkMixin",
     "PlayerMixin"
   ],
   "client": [
