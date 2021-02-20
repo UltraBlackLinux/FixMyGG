@@ -28,6 +28,7 @@ public class NetworkMixin {
     String itemSeperator = Config.get().misc.itemSeparator;
     boolean autoGG = Config.get().autogg.autoGG;
     String finalMsg = Config.get().autogg.finalMsg;
+    int delayTime = Config.get().autogg.delayTime;
     private static final String[] ggTriggers = Config.get().autogg.autoGGRegexPatterns;
     private static final String antikarma = "^\\+(?<karma>\\d)+ Karma!$";
 
@@ -49,13 +50,22 @@ public class NetworkMixin {
                 }
                 else number = Config.get().autogg.stringsNumber;
                 FixMyGG_LOGGER.info(number);
-                try { //1t = 1/3s
+                try {
                     ci.cancel();
                     Config.get().fixMyGG.skipCheck = true;
-                    client.player.sendChatMessage(tmp.get(0));
-                    if (!finalMsg.replace(" ", "").equals("")) {
-                        client.player.sendChatMessage(finalMsg);
-                    }
+                    //thread for delay
+                    Thread thread = new Thread(() -> {
+                        try {
+                            Thread.sleep(delayTime);
+                            client.player.sendChatMessage(tmp.get(0));
+                            if (!finalMsg.replace(" ", "").equals("")) {
+                                client.player.sendChatMessage(finalMsg);
+                            }
+                        } catch (InterruptedException e) {
+                            //ignore
+                        }
+                    });
+                    thread.start();
                     Config.get().fixMyGG.skipCheck = false;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected!"), false);

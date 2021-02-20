@@ -10,6 +10,7 @@
 
   "text.autoconfig.fixmygg.category.AutoGG": "AutoGG",
   "text.autoconfig.fixmygg.option.autogg.autoGG": "Enabled",
+  "text.autoconfig.fixmygg.option.autogg.delayTime": "Delay",
   "text.autoconfig.fixmygg.option.autogg.strings": "Strings",
   "text.autoconfig.fixmygg.option.autogg.stringsNumber": "Index",
   "text.autoconfig.fixmygg.option.autogg.finalMsg": "Completion Message",

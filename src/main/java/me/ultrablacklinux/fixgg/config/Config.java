@@ -59,32 +59,45 @@ public class Config extends PartitioningSerializer.GlobalData {
 
     @me.shedaniel.autoconfig.annotation.Config(name = "fixgg")
     public static class FixMyGG implements ConfigData {
+
         @ConfigEntry.Gui.Excluded
         public boolean skipCheck;
 
         public boolean enabled = true;
+
         @Comment("Words to check for - They mustn't contain themselves")
         public String words = "gg;gf;gp";
+
         @Comment("Max amount of characters allowed in front of the gg")
         public int index = 3;
+
         @Comment("Max amount of characters allowed in the word")
         public int length = 6;
+
         public boolean message = true;
     }
 
     @me.shedaniel.autoconfig.annotation.Config(name = "autogg")
     public static class AutoGG implements ConfigData {
+
         @Comment("Note: Custom regex patterns can be added via the config")
         public boolean autoGG = true;
-        //public String autoGGMsg = "gg";
+
+        @Comment("AutoGG delay in ms")
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 2000)
+        public int delayTime = 350;
+
         @Comment("List of messages, that can be sent")
-        //public boolean alternateStringsToggled = false;
         public String strings = "Good Game;Good Fight;gg;gf";
+
         @Comment("The index of the Strings above, or just \"-1\" for a random entry")
         public int stringsNumber = -1;
+
+
         @Comment("Message to be sent after the gg")
         public String finalMsg = "";
 
+        @ConfigEntry.Gui.Excluded
         public String[] autoGGRegexPatterns = {"^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
                 "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
                 "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|ing Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
@@ -99,17 +112,13 @@ public class Config extends PartitioningSerializer.GlobalData {
                 "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
                 "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
                 "^ +. YOUR STATISTICS .$"};
-
-        /* If someone knows, how to use multithreading, go ahead, and open a PR!
-        @Comment("AutoGG-Message delay in ticks")
-        @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
-        public int delayTime = 50;
-         */
         }
 
     @me.shedaniel.autoconfig.annotation.Config(name = "misc")
     public static class Misc implements ConfigData {
+
         public boolean antiKarma = false;
+
         public String itemSeparator = ";";
 
     }
