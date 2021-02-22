@@ -21,36 +21,19 @@ public class Config extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public AutoGG autogg = new AutoGG();
 
+    @ConfigEntry.Category("ChatUtils")
+    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public ChatUtils chatUtils = new ChatUtils();
+
     @ConfigEntry.Category("Misc")
     @ConfigEntry.Gui.TransitiveObject
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public Misc misc = new Misc();
 
+
     public static void init() {
         AutoConfig.register(Config.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
-        /* someone make this work - dang
-        holder.registerSaveListener((manager, data) -> {
-            if (data.autogg.stringsNumber < -1 || data.autogg.stringsNumber > Config.get().autogg.strings.length()) {
-                client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected! It can't be smaller than -1 or bigger than the word list!"), false);
-            }
-
-            if (data.fixMyGG.index < 0 || data.fixMyGG.index > Config.get().fixMyGG.words.length()) {
-                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong max index detected! It can't be smaller than 0 or bigger than the word list!"), false);
-            }
-
-            if (data.fixMyGG.length < 0) {
-                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong max length detected! It can't be smaller than 1"), false);
-            }
-
-            if (data.fixMyGG.words.equals("") || data.fixMyGG.words.equals(" ") || data.autogg.strings.equals("") || data.autogg.strings.equals(" ")) {
-                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong word detected! It can't be empty!"), false);
-            }
-
-            if (data.misc.itemSeparator.equals("") || data.misc.itemSeparator.equals(" ")) {
-                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong word separator detected! It can't be empty!"), false);
-            }
-            return ActionResult.PASS;
-        }); */
     }
 
     public static Config get() {
@@ -112,7 +95,13 @@ public class Config extends PartitioningSerializer.GlobalData {
                 "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
                 "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
                 "^ +. YOUR STATISTICS .$"};
-        }
+    }
+    @me.shedaniel.autoconfig.annotation.Config(name = "chatUtils")
+    public static class ChatUtils implements ConfigData {
+        public boolean enabled = true;
+        public String varied = "!;!";
+        public String wide = "-;-";
+    }
 
     @me.shedaniel.autoconfig.annotation.Config(name = "misc")
     public static class Misc implements ConfigData {

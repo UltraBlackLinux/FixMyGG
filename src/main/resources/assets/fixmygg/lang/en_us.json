@@ -15,6 +15,11 @@
   "text.autoconfig.fixmygg.option.autogg.stringsNumber": "Index",
   "text.autoconfig.fixmygg.option.autogg.finalMsg": "Completion Message",
 
+  "text.autoconfig.fixmygg.category.ChatUtils": "ChatUtils",
+  "text.autoconfig.fixmygg.option.chatUtils.enabled": "Enabled",
+  "text.autoconfig.fixmygg.option.chatUtils.varied": "Varied",
+  "text.autoconfig.fixmygg.option.chatUtils.wide": "Wide",
+
   "text.autoconfig.fixmygg.category.Misc": "Misc",
   "text.autoconfig.fixmygg.option.misc.itemSeparator": "Item Separator",
   "text.autoconfig.fixmygg.option.misc.antiKarma": "AntiKarma Enabled"
