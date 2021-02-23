@@ -38,21 +38,27 @@ public abstract class PlayerMixin {
         int maxLength = Config.get().fixMyGG.length;
         String[] msg = fmsg.split(" ");
         boolean changed = false;
-
         if (fmggenabled) {
-            for (String checkWord : words) {
-                for (int currentLocation = 0; currentLocation < msg.length; currentLocation++) {
-                    if (msg[currentLocation].toLowerCase().contains(checkWord) && !msg[currentLocation].toLowerCase().matches(checkWord)) {
-                        if (msg[currentLocation].indexOf(checkWord) <= maxIndex && msg[currentLocation].length() <= maxLength) {
-                            changed = true;
-                            if (msg[currentLocation].contains(checkWord.toUpperCase())) {
-                                msg[currentLocation] = checkWord.toUpperCase();
-                            } else if (msg[currentLocation].contains(checkWord.toLowerCase())) {
-                                msg[currentLocation] = checkWord.toLowerCase();
+            try {
+                if (Config.get().fixMyGG.words.replace(itemSeperator, "").equals("")) {
+                    throw new Exception();
+                }
+                for (String checkWord : words) {
+                    for (int currentLocation = 0; currentLocation < msg.length; currentLocation++) {
+                        if (msg[currentLocation].toLowerCase().contains(checkWord) && !msg[currentLocation].toLowerCase().matches(checkWord)) {
+                            if (msg[currentLocation].indexOf(checkWord) <= maxIndex && msg[currentLocation].length() <= maxLength) {
+                                changed = true;
+                                if (msg[currentLocation].contains(checkWord.toUpperCase())) {
+                                    msg[currentLocation] = checkWord.toUpperCase();
+                                } else if (msg[currentLocation].contains(checkWord.toLowerCase())) {
+                                    msg[currentLocation] = checkWord.toLowerCase();
+                                }
                             }
                         }
                     }
                 }
+            } catch (Exception e) {
+                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong input detected!"), false);
             }
         }
         if (changed && !Config.get().fixMyGG.skipCheck) {
@@ -65,17 +71,19 @@ public abstract class PlayerMixin {
         //chatUtils
         if (chatUtilsEnabled) {
             int type = -1;
-            //String[] charMsg = fmsg.split("");
-            if (fmsg.startsWith(wideChat[0]) && fmsg.endsWith(wideChat[1])) {
-                type = 1;
-                info.cancel();
-                client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
-            }
-            else if (fmsg.startsWith(variedChat[0]) && fmsg.endsWith(variedChat[1])) {
-                type = 0;
-                info.cancel();
-                client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
+            try {
+                if (fmsg.startsWith(wideChat[0]) && fmsg.endsWith(wideChat[1])) {
+                    type = 1;
+                    info.cancel();
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
+                } else if (fmsg.startsWith(variedChat[0]) && fmsg.endsWith(variedChat[1])) {
+                    type = 0;
+                    info.cancel();
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
 
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+            client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false);
             }
         }
     }
