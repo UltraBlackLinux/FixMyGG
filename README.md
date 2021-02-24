@@ -2,12 +2,40 @@
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
-
 # FixMyGG
 
 This is a little Project I started, since I am tired of having typos in "gg".
 
 __This mod is compatible with any Version of Fabric!__
 
+# Modmenu
+You can currently change everything except from the sending delay.
+
+# Features:
+- FixMyGG:
+  - Custom words list
+  - Custom max index and max length
+  - Toggleable notification
+
+- Emojis:
+  - Custom emoji list
+  - Custom pre- and suffix
+
+- AutoGG:
+  - Custom words list
+  - Customizable delay
+  - Custom word index (including random)
+
+- ChatUtils:
+  - Custom pre- and suffix
+  - Varied, Wide and Fancy formatting
+  - Custom Unicode and ASCII character list
+
+- Misc:
+  - AntiKarma
+  - Custom Seconday and Primary list Item seperator char
+
+
+
 # Demo
-https://youtu.be/lFfd3lb7TNY
+https://www.youtube.com/watch?v=UCit7VILsJ0
