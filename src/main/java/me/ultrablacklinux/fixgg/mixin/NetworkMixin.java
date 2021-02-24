@@ -2,7 +2,6 @@ package me.ultrablacklinux.fixgg.mixin;
 
 import me.ultrablacklinux.fixgg.FixGG;
 import me.ultrablacklinux.fixgg.config.Config;
-import me.ultrablacklinux.fixgg.util.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;

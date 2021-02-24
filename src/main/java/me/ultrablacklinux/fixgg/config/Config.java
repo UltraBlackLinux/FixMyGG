@@ -16,6 +16,11 @@ public class Config extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public FixMyGG fixMyGG = new FixMyGG();
 
+    @ConfigEntry.Category("Emojis")
+    @ConfigEntry.Gui.TransitiveObject
+    @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+    public Emojis emojis = new Emojis();
+
     @ConfigEntry.Category("AutoGG")
     @ConfigEntry.Gui.TransitiveObject
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
@@ -60,6 +65,15 @@ public class Config extends PartitioningSerializer.GlobalData {
         public boolean message = true;
     }
 
+    @me.shedaniel.autoconfig.annotation.Config(name = "emojis")
+    public static class Emojis implements ConfigData {
+        public boolean enabled = true;
+
+        public String emojis = "bear:ʕ•ᴥ•ʔ;hmpf:ಠ_ಠ;shrug:¯\\_(ツ)_/¯";
+
+        public String trigger = ":;:";
+    }
+
     @me.shedaniel.autoconfig.annotation.Config(name = "autogg")
     public static class AutoGG implements ConfigData {
 
@@ -73,7 +87,7 @@ public class Config extends PartitioningSerializer.GlobalData {
         @Comment("List of messages, that can be sent")
         public String strings = "Good Game;Good Fight;gg;gf";
 
-        @Comment("The index of the Strings above, or just \"-1\" for a random entry")
+        @Comment("The index of the Strings above, or \"-1\" for a random entry")
         public int stringsNumber = -1;
 
 
@@ -99,8 +113,16 @@ public class Config extends PartitioningSerializer.GlobalData {
     @me.shedaniel.autoconfig.annotation.Config(name = "chatUtils")
     public static class ChatUtils implements ConfigData {
         public boolean enabled = true;
+        @Comment("Pre- and Suffix")
         public String varied = "!;!";
+        @Comment("Pre- and Suffix")
         public String wide = "-;-";
+        @Comment("Pre- and Suffix")
+        public String fancy = "#;#";
+        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.]")
+        public String unicodeChars = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９ ？!․，";
+        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.]")
+        public String asciiChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ?!.,";
     }
 
     @me.shedaniel.autoconfig.annotation.Config(name = "misc")
@@ -109,6 +131,8 @@ public class Config extends PartitioningSerializer.GlobalData {
         public boolean antiKarma = false;
 
         public String itemSeparator = ";";
+
+        public String optItemSeparator = ":";
 
     }
 

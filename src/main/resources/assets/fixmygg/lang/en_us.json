@@ -8,6 +8,11 @@
   "text.autoconfig.fixmygg.option.fixMyGG.message": "Notification Enabled",
   "text.autoconfig.fixmygg.option.fixMyGG.words": "Words",
 
+  "text.autoconfig.fixmygg.category.Emojis": "Emojis",
+  "text.autoconfig.fixmygg.option.emojis.enabled": "Enabled",
+  "text.autoconfig.fixmygg.option.emojis.emojis": "Emojis",
+  "text.autoconfig.fixmygg.option.emojis.trigger": "Trigger",
+
   "text.autoconfig.fixmygg.category.AutoGG": "AutoGG",
   "text.autoconfig.fixmygg.option.autogg.autoGG": "Enabled",
   "text.autoconfig.fixmygg.option.autogg.delayTime": "Delay",
@@ -19,8 +24,12 @@
   "text.autoconfig.fixmygg.option.chatUtils.enabled": "Enabled",
   "text.autoconfig.fixmygg.option.chatUtils.varied": "Varied",
   "text.autoconfig.fixmygg.option.chatUtils.wide": "Wide",
+  "text.autoconfig.fixmygg.option.chatUtils.fancy": "Fancy",
+  "text.autoconfig.fixmygg.option.chatUtils.unicodeChars": "Unicode Characters",
+  "text.autoconfig.fixmygg.option.chatUtils.asciiChars": "ASCII Characters",
 
   "text.autoconfig.fixmygg.category.Misc": "Misc",
+  "text.autoconfig.fixmygg.option.misc.antiKarma": "AntiKarma Enabled",
   "text.autoconfig.fixmygg.option.misc.itemSeparator": "Item Separator",
-  "text.autoconfig.fixmygg.option.misc.antiKarma": "AntiKarma Enabled"
+  "text.autoconfig.fixmygg.option.misc.optItemSeparator": "Secondary Item Separator"
 }

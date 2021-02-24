@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class PlayerMixin {
@@ -21,13 +23,26 @@ public abstract class PlayerMixin {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(String fmsg, CallbackInfo info) {
         String itemSeperator = Config.get().misc.itemSeparator;
+        String optItemSeperator = Config.get().misc.optItemSeparator;
+
+        String[] trigger = Config.get().emojis.trigger.split(itemSeperator);
         boolean chatUtilsEnabled = Config.get().chatUtils.enabled;
+        boolean emojisEnabled = Config.get().emojis.enabled;
+        String[] emojisList = Config.get().emojis.emojis.split(itemSeperator);
         String[] variedChat = Config.get().chatUtils.varied.split(itemSeperator);
         String[] wideChat = Config.get().chatUtils.wide.split(itemSeperator);
+        String[] fancyChat = Config.get().chatUtils.fancy.split(itemSeperator);
+
+        HashMap<String, String> emojis = new HashMap<>(); //value: name; key: emoji
+        for (String s : emojisList) {
+            String[] split = s.split(optItemSeperator);
+            emojis.put(split[0], split[1].replace(optItemSeperator, ""));
+        }
 
         ArrayList<String> filterStrings = new ArrayList<>();
         for (String s : variedChat) filterStrings.add(s.replace(itemSeperator, ""));
         for (String s : wideChat) filterStrings.add(s.replace(itemSeperator, ""));
+        for (String s : fancyChat) filterStrings.add(s.replace(itemSeperator, ""));
 
         //fixMyGG
         String[] words = Config.get().fixMyGG.words.split(itemSeperator);
@@ -81,9 +96,24 @@ public abstract class PlayerMixin {
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
 
+                } else if (fmsg.startsWith(fancyChat[0]) && fmsg.endsWith(fancyChat[1])) {
+                    type = 2;
+                    info.cancel();
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
             client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false);
+            }
+        }
+
+        //emojis
+        if (emojisEnabled) {
+            for (Map.Entry<String, String> entry : emojis.entrySet()) {
+                String tmp = fmsg.replace((trigger[0] + entry.getKey() + trigger[1].replace(itemSeperator, "")), entry.getValue());
+                if (fmsg != tmp) {
+                    info.cancel();
+                    client.player.sendChatMessage(tmp);
+                }
             }
         }
     }
