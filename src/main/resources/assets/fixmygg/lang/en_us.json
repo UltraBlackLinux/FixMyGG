@@ -31,5 +31,6 @@
   "text.autoconfig.fixmygg.category.Misc": "Misc",
   "text.autoconfig.fixmygg.option.misc.antiKarma": "AntiKarma Enabled",
   "text.autoconfig.fixmygg.option.misc.itemSeparator": "Item Separator",
-  "text.autoconfig.fixmygg.option.misc.optItemSeparator": "Secondary Item Separator"
+  "text.autoconfig.fixmygg.option.misc.optItemSeparator": "Secondary Item Separator",
+  "text.autoconfig.fixmygg.option.misc.regexPlaceholder": "Placeholder"
 }
