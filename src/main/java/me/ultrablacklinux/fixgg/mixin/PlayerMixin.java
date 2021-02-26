@@ -12,9 +12,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class PlayerMixin {
@@ -23,26 +22,22 @@ public abstract class PlayerMixin {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(String fmsg, CallbackInfo info) {
         String itemSeperator = Config.get().misc.itemSeparator;
-        String optItemSeperator = Config.get().misc.optItemSeparator;
 
-        String[] trigger = Config.get().emojis.trigger.split(itemSeperator);
+        ArrayList<String> trigger = Utils.simpleStringToAL(Config.get().emojis.trigger);
         boolean chatUtilsEnabled = Config.get().chatUtils.enabled;
         boolean emojisEnabled = Config.get().emojis.enabled;
-        String[] emojisList = Config.get().emojis.emojis.split(itemSeperator);
-        String[] variedChat = Config.get().chatUtils.varied.split(itemSeperator);
-        String[] wideChat = Config.get().chatUtils.wide.split(itemSeperator);
-        String[] fancyChat = Config.get().chatUtils.fancy.split(itemSeperator);
 
-        HashMap<String, String> emojis = new HashMap<>(); //value: name; key: emoji
-        for (String s : emojisList) {
-            String[] split = s.split(optItemSeperator);
-            emojis.put(split[0], split[1].replace(optItemSeperator, ""));
-        }
+        //chatformatting
+        ArrayList<String> variedChat = Utils.simpleStringToAL(Config.get().chatUtils.varied);
+        ArrayList<String> wideChat = Utils.simpleStringToAL(Config.get().chatUtils.varied);
+        ArrayList<String> fancyChat = Utils.simpleStringToAL(Config.get().chatUtils.fancy);
 
-        ArrayList<String> filterStrings = new ArrayList<>();
-        for (String s : variedChat) filterStrings.add(s.replace(itemSeperator, ""));
-        for (String s : wideChat) filterStrings.add(s.replace(itemSeperator, ""));
-        for (String s : fancyChat) filterStrings.add(s.replace(itemSeperator, ""));
+        //value: name; key: emoji
+        HashMap<String, String> emojis = Utils.advancedStringToHM(Config.get().emojis.emojis);
+
+        //Strings to remove from the message
+        ArrayList<ArrayList<String>> tmpfilter = new ArrayList<>(); tmpfilter.add(variedChat); tmpfilter.add(wideChat); tmpfilter.add(fancyChat);
+        ArrayList<String> filterStrings = Utils.stringALJoiner(tmpfilter);
 
         //fixMyGG
         String[] words = Config.get().fixMyGG.words.split(itemSeperator);
@@ -55,7 +50,7 @@ public abstract class PlayerMixin {
         boolean changed = false;
         if (fmggenabled) {
             try {
-                if (Config.get().fixMyGG.words.replace(itemSeperator, "").equals("")) {
+                if (Config.get().fixMyGG.words.replace(itemSeperator, "").trim().equals("")) {
                     throw new Exception();
                 }
                 for (String checkWord : words) {
@@ -72,49 +67,52 @@ public abstract class PlayerMixin {
                         }
                     }
                 }
-            } catch (Exception e) {
-                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong input detected!"), false);
-            }
+            } catch (Exception e) { client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong input detected!"), false); }
         }
         if (changed && !Config.get().fixMyGG.skipCheck) {
             if (showMessage) client.player.sendMessage(Text.of("Fixed a typo!"), true);
             info.cancel();
             client.player.sendChatMessage(String.join(" ", msg));
-            changed = false;
         }
 
         //chatUtils
         if (chatUtilsEnabled) {
-            int type = -1;
+            int type;
             try {
-                if (fmsg.startsWith(wideChat[0]) && fmsg.endsWith(wideChat[1])) {
+                if (fmsg.startsWith(wideChat.get(0)) && fmsg.endsWith(wideChat.get(1))) {
                     type = 1;
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
-                } else if (fmsg.startsWith(variedChat[0]) && fmsg.endsWith(variedChat[1])) {
+                } else if (fmsg.startsWith(variedChat.get(1)) && fmsg.endsWith(variedChat.get(1))) {
                     type = 0;
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
 
-                } else if (fmsg.startsWith(fancyChat[0]) && fmsg.endsWith(fancyChat[1])) {
+                } else if (fmsg.startsWith(fancyChat.get(0)) && fmsg.endsWith(fancyChat.get(1))) {
                     type = 2;
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-            client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false);
-            }
+            } catch (ArrayIndexOutOfBoundsException e) { client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false); }
         }
 
         //emojis
         if (emojisEnabled) {
             for (Map.Entry<String, String> entry : emojis.entrySet()) {
-                String tmp = fmsg.replace((trigger[0] + entry.getKey() + trigger[1].replace(itemSeperator, "")), entry.getValue());
-                if (fmsg != tmp) {
+                String tmp = fmsg.replace(trigger.get(0) + entry.getKey() + trigger.get(1), entry.getValue());
+                if (!fmsg.equals(tmp)) {
                     info.cancel();
                     client.player.sendChatMessage(tmp);
                 }
             }
+        }
+
+        if (fmsg.equals("/placeholders")) {
+            info.cancel();
+            client.player.sendMessage(Text.of(
+                    "--- AutoGG placeholders --- \n" +
+                    "PLAYER: Current player's name"), false);
+
         }
     }
 }

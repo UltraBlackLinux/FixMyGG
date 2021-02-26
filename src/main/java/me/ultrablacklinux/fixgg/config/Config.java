@@ -36,6 +36,10 @@ public class Config extends PartitioningSerializer.GlobalData {
     @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
     public Misc misc = new Misc();
 
+    enum regexSuggestion {
+        PLAYER,
+    }
+
 
     public static void init() {
         AutoConfig.register(Config.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
@@ -108,7 +112,8 @@ public class Config extends PartitioningSerializer.GlobalData {
                 "^ +(?:Criminal|Cop)s won the game!$",
                 "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
                 "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
-                "^ +. YOUR STATISTICS .$"};
+                "^ +. YOUR STATISTICS .$",
+                "^ %PLAYER% "};
     }
     @me.shedaniel.autoconfig.annotation.Config(name = "chatUtils")
     public static class ChatUtils implements ConfigData {
@@ -119,9 +124,9 @@ public class Config extends PartitioningSerializer.GlobalData {
         public String wide = "-;-";
         @Comment("Pre- and Suffix")
         public String fancy = "#;#";
-        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.]")
+        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.,]")
         public String unicodeChars = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ０１２３４５６７８９ ？!․，";
-        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.]")
+        @Comment("Only for FancyChat - [a-z][A-Z][0-9][ ][?!.,]")
         public String asciiChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ?!.,";
     }
 
@@ -134,9 +139,13 @@ public class Config extends PartitioningSerializer.GlobalData {
 
         public String optItemSeparator = ":";
 
+        @Comment("Regex patterns only: Pre- and Suffix of Placeholders. Type /placeholders for help")
+        public String regexPlaceholder = "%;%";
+
     }
 
 }
+
 
 
 
