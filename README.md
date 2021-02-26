@@ -22,6 +22,7 @@ __This mod is compatible with any Version of Fabric!__
   - Custom words list
   - Customizable delay
   - Custom word index (including random)
+  - Custom Regex patterns, Placeholders
 
 - ChatUtils:
   - Custom pre- and suffix
