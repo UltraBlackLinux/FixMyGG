@@ -112,8 +112,7 @@ public class Config extends PartitioningSerializer.GlobalData {
                 "^ +(?:Criminal|Cop)s won the game!$",
                 "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
                 "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
-                "^ +. YOUR STATISTICS .$",
-                "^ %PLAYER% "};
+                "^ +. YOUR STATISTICS .$"};
     }
     @me.shedaniel.autoconfig.annotation.Config(name = "chatUtils")
     public static class ChatUtils implements ConfigData {
