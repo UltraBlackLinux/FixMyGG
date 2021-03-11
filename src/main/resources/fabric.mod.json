@@ -3,7 +3,7 @@
   "id": "fixmygg",
   "version": "${version}",
   "name": "FixMyGG",
-  "description": "Fixes typos in ggs",
+  "description": "Chat Utility mod",
   "authors": [
     "UltraBlackLinux"
   ],

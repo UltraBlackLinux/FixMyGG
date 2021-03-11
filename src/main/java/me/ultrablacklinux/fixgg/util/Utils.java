@@ -65,10 +65,12 @@ public class Utils  {
 
     public static HashMap<String, String> advancedStringToHM(String input) {
         HashMap<String, String> finished = new HashMap<>();
-        for (String s : input.split(itemSeperator)) {
-            String[] split = s.split(optItemSeperator);
-            finished.put(split[0].replace(itemSeperator, ""), split[1].replace(optItemSeperator, ""));
-        }
+        try {
+            for (String s : input.split(itemSeperator)) {
+                String[] split = s.split(optItemSeperator);
+                finished.put(split[0].replace(itemSeperator, ""), split[1].replace(optItemSeperator, ""));
+            }
+        } catch (Exception e) {finished = null;}
         return finished;
     }
 

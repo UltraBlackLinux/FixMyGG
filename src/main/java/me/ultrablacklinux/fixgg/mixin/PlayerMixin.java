@@ -33,7 +33,7 @@ public abstract class PlayerMixin {
         ArrayList<String> fancyChat = Utils.simpleStringToAL(Config.get().chatUtils.fancy);
 
         //value: name; key: emoji
-        HashMap<String, String> emojis = Utils.advancedStringToHM(Config.get().emojis.emojis);
+        HashMap<String, String> emojis;
 
         //Strings to remove from the message
         ArrayList<ArrayList<String>> tmpfilter = new ArrayList<>(); tmpfilter.add(variedChat); tmpfilter.add(wideChat); tmpfilter.add(fancyChat);
@@ -67,7 +67,10 @@ public abstract class PlayerMixin {
                         }
                     }
                 }
-            } catch (Exception e) { client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong input detected!"), false); }
+            } catch (Exception e) {
+                client.player.sendMessage(Text.of("§1[FixMyGG] §cWrong input detected!"), false);
+                info.cancel();
+            }
         }
         if (changed && !Config.get().fixMyGG.skipCheck) {
             if (showMessage) client.player.sendMessage(Text.of("Fixed a typo!"), true);
@@ -76,14 +79,14 @@ public abstract class PlayerMixin {
         }
 
         //chatUtils
-        if (chatUtilsEnabled) {
+        if (chatUtilsEnabled && fmsg.length() >= 3) {
             int type;
             try {
                 if (fmsg.startsWith(wideChat.get(0)) && fmsg.endsWith(wideChat.get(1))) {
                     type = 1;
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
-                } else if (fmsg.startsWith(variedChat.get(1)) && fmsg.endsWith(variedChat.get(1))) {
+                } else if (fmsg.startsWith(variedChat.get(0)) && fmsg.endsWith(variedChat.get(1))) {
                     type = 0;
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
@@ -93,17 +96,26 @@ public abstract class PlayerMixin {
                     info.cancel();
                     client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
                 }
-            } catch (ArrayIndexOutOfBoundsException e) { client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false); }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false);
+                info.cancel();
+            }
         }
 
         //emojis
         if (emojisEnabled) {
-            for (Map.Entry<String, String> entry : emojis.entrySet()) {
-                String tmp = fmsg.replace(trigger.get(0) + entry.getKey() + trigger.get(1), entry.getValue());
-                if (!fmsg.equals(tmp)) {
-                    info.cancel();
-                    client.player.sendChatMessage(tmp);
+            try {
+                emojis = Utils.advancedStringToHM(Config.get().emojis.emojis);
+                for (Map.Entry<String, String> entry : emojis.entrySet()) {
+                    String tmp = fmsg.replace(trigger.get(0) + entry.getKey() + trigger.get(1), entry.getValue());
+                    if (!fmsg.equals(tmp)) {
+                        info.cancel();
+                        client.player.sendChatMessage(tmp);
+                    }
                 }
+            } catch (NullPointerException e) {
+                client.player.sendMessage(Text.of("§1[Emojis] §cWrong input detected!"), false);
+                info.cancel();
             }
         }
 
