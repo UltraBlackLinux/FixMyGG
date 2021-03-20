@@ -1,4 +1,4 @@
-package me.ultrablacklinux.fixgg.config;
+package me.ultrablacklinux.fixmygg.config;
 
 
 import me.shedaniel.autoconfig.AutoConfig;
@@ -51,10 +51,6 @@ public class Config extends PartitioningSerializer.GlobalData {
 
     @me.shedaniel.autoconfig.annotation.Config(name = "fixgg")
     public static class FixMyGG implements ConfigData {
-
-        @ConfigEntry.Gui.Excluded
-        public boolean skipCheck;
-
         public boolean enabled = true;
 
         @Comment("Words to check for - They mustn't contain themselves")

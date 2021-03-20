@@ -1,11 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.ultrablacklinux.fixgg.mixin",
+  "package": "me.ultrablacklinux.fixmygg.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "LoginHelloMixin",
-    "NetworkMixin",
+    "ClientPlayNetworkHandlerMixin",
     "PlayerMixin"
   ],
   "client": [

@@ -1,8 +1,7 @@
-package me.ultrablacklinux.fixgg.util;
+package me.ultrablacklinux.fixmygg.util;
 
 
-import com.mojang.authlib.GameProfile;
-import me.ultrablacklinux.fixgg.config.Config;
+import me.ultrablacklinux.fixmygg.config.Config;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
@@ -74,17 +73,21 @@ public class Utils  {
         return finished;
     }
 
-    public static String[] regexProcessing(String[] input) {
-        ArrayList<String> triggers = simpleStringToAL(Config.get().misc.regexPlaceholder);
-        HashMap<String, String> placeholders = new HashMap<>();
-        //placeholders with value
-        placeholders.put("PLAYER", playername);
+    public static String[] processRegex(String[] input) {
+        try {
+            ArrayList<String> triggers = simpleStringToAL(Config.get().misc.regexPlaceholder);
+            HashMap<String, String> placeholders = new HashMap<>();
+            //placeholders with value
+            placeholders.put("PLAYER", client.player.getName().getString());
 
-        for (int s = 0; s < input.length; s++) {
-            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                input[s] = input[s].replace(triggers.get(0) + entry.getKey() + triggers.get(1), entry.getValue());
+            for (int s = 0; s < input.length; s++) {
+                for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                    if (input[s].contains((triggers.get(0) + entry.getKey() + triggers.get(1)))) {
+                        input[s] = input[s].replace(triggers.get(0) + entry.getKey() + triggers.get(1), entry.getValue());
+                    }
+                }
             }
-        }
-        return input;
+            return input;
+        } catch (Exception e) {e.printStackTrace(); return null;}
     }
 }

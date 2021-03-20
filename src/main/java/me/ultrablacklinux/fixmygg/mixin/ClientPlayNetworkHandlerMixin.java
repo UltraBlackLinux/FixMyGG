@@ -1,7 +1,8 @@
-package me.ultrablacklinux.fixgg.mixin;
+package me.ultrablacklinux.fixmygg.mixin;
 
-import me.ultrablacklinux.fixgg.config.Config;
-import me.ultrablacklinux.fixgg.util.Utils;
+import me.ultrablacklinux.fixmygg.FixMyGG;
+import me.ultrablacklinux.fixmygg.config.Config;
+import me.ultrablacklinux.fixmygg.util.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
@@ -17,12 +18,12 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Mixin(ClientPlayNetworkHandler.class)
-public class NetworkMixin {
+public class ClientPlayNetworkHandlerMixin {
+
     @Shadow private MinecraftClient client;
-    String itemSeperator = Config.get().misc.itemSeparator;
+    String itemSeparator = Config.get().misc.itemSeparator;
     String finalMsg = Config.get().autogg.finalMsg;
     int delayTime = Config.get().autogg.delayTime;
-    private static final String[] ggTriggers = Utils.regexProcessing(Config.get().autogg.autoGGRegexPatterns); //FREEZES CLIENT
 
     @Inject(method = "onGameMessage", at = @At("HEAD"), cancellable = true)
     public void onGameMessage(GameMessageS2CPacket packet, CallbackInfo ci) {
@@ -32,9 +33,10 @@ public class NetworkMixin {
         }
 
         //autogg
-        for (String pattern : ggTriggers) {
+
+        for (String pattern : Utils.processRegex(Config.get().autogg.autoGGRegexPatterns)) {
             if (packet.getMessage().getString().matches(pattern) && Config.get().autogg.autoGG) {
-                ArrayList<String> tmp = new ArrayList<>(Arrays.asList(Config.get().autogg.strings.split(itemSeperator)));
+                ArrayList<String> tmp = new ArrayList<>(Arrays.asList(Config.get().autogg.strings.split(itemSeparator)));
                 int number;
 
                 if (Config.get().autogg.stringsNumber <= -1) {
@@ -46,7 +48,7 @@ public class NetworkMixin {
                 try {
                     ci.cancel();
                     //prevent the code from checking itself
-                    Config.get().fixMyGG.skipCheck = true;
+                    FixMyGG.skipCheck = true;
 
                     Thread thread = new Thread(() -> {
                         try {
@@ -61,7 +63,7 @@ public class NetworkMixin {
 
                     thread.start();
                     //turn of the prevention
-                    Config.get().fixMyGG.skipCheck = false;
+                    FixMyGG.skipCheck = false;
                 } catch (ArrayIndexOutOfBoundsException e) { client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected!"), false); }
             }
         }

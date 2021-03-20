@@ -15,21 +15,18 @@
   "icon": "assets/fixmygg/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "me.ultrablacklinux.fixgg.client.FixGGClient"
-    ],
     "main": [
-      "me.ultrablacklinux.fixgg.FixGG"
+      "me.ultrablacklinux.fixmygg.FixMyGG"
     ],
     "modmenu": [
-      "me.ultrablacklinux.fixgg.config.modmenu.ModMenuEntry"
+      "me.ultrablacklinux.fixmygg.config.modmenu.ModMenuEntry"
     ]
   },
   "mixins": [
-    "FixGG.mixins.json"
+    "FixMyGG.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.1",
+    "fabricloader": ">=0.11.2",
     "fabric": "*",
     "minecraft": "*",
     "modmenu": ">=1.16.7",

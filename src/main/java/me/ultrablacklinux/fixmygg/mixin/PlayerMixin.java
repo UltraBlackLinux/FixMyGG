@@ -1,8 +1,9 @@
-package me.ultrablacklinux.fixgg.mixin;
+package me.ultrablacklinux.fixmygg.mixin;
 
 
-import me.ultrablacklinux.fixgg.config.Config;
-import me.ultrablacklinux.fixgg.util.Utils;
+import me.ultrablacklinux.fixmygg.FixMyGG;
+import me.ultrablacklinux.fixmygg.config.Config;
+import me.ultrablacklinux.fixmygg.util.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
@@ -17,10 +18,13 @@ import java.util.*;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class PlayerMixin {
-    @Shadow @Final
+    @Shadow
+    @Final
     protected MinecraftClient client;
+
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(String fmsg, CallbackInfo info) {
+
         String itemSeperator = Config.get().misc.itemSeparator;
 
         ArrayList<String> trigger = Utils.simpleStringToAL(Config.get().emojis.trigger);
@@ -36,12 +40,16 @@ public abstract class PlayerMixin {
         HashMap<String, String> emojis;
 
         //Strings to remove from the message
-        ArrayList<ArrayList<String>> tmpfilter = new ArrayList<>(); tmpfilter.add(variedChat); tmpfilter.add(wideChat); tmpfilter.add(fancyChat);
+        ArrayList<ArrayList<String>> tmpfilter = new ArrayList<>();
+        tmpfilter.add(variedChat);
+        tmpfilter.add(wideChat);
+        tmpfilter.add(fancyChat);
         ArrayList<String> filterStrings = Utils.stringALJoiner(tmpfilter);
 
         //fixMyGG
         String[] words = Config.get().fixMyGG.words.split(itemSeperator);
-        for (int location = 0; location < words.length; location++) words[location] = words[location].replace(itemSeperator, "");
+        for (int location = 0; location < words.length; location++)
+            words[location] = words[location].replace(itemSeperator, "");
         boolean fmggenabled = Config.get().fixMyGG.enabled;
         boolean showMessage = Config.get().fixMyGG.message;
         int maxIndex = Config.get().fixMyGG.index;
@@ -72,7 +80,7 @@ public abstract class PlayerMixin {
                 info.cancel();
             }
         }
-        if (changed && !Config.get().fixMyGG.skipCheck) {
+        if (changed && !FixMyGG.skipCheck) {
             if (showMessage) client.player.sendMessage(Text.of("Fixed a typo!"), true);
             info.cancel();
             client.player.sendChatMessage(String.join(" ", msg));
@@ -80,21 +88,17 @@ public abstract class PlayerMixin {
 
         //chatUtils
         if (chatUtilsEnabled && fmsg.length() >= 3) {
-            int type;
             try {
                 if (fmsg.startsWith(wideChat.get(0)) && fmsg.endsWith(wideChat.get(1))) {
-                    type = 1;
                     info.cancel();
-                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, 1, fmsg));
                 } else if (fmsg.startsWith(variedChat.get(0)) && fmsg.endsWith(variedChat.get(1))) {
-                    type = 0;
                     info.cancel();
-                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, 0, fmsg));
 
                 } else if (fmsg.startsWith(fancyChat.get(0)) && fmsg.endsWith(fancyChat.get(1))) {
-                    type = 2;
                     info.cancel();
-                    client.player.sendChatMessage(Utils.formatChat(filterStrings, type, fmsg));
+                    client.player.sendChatMessage(Utils.formatChat(filterStrings, 2, fmsg));
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 client.player.sendMessage(Text.of("§1[ChatUtils] §cWrong input detected!"), false);
@@ -117,14 +121,6 @@ public abstract class PlayerMixin {
                 client.player.sendMessage(Text.of("§1[Emojis] §cWrong input detected!"), false);
                 info.cancel();
             }
-        }
-
-        if (fmsg.equals("/placeholders")) {
-            info.cancel();
-            client.player.sendMessage(Text.of(
-                    "--- AutoGG placeholders --- \n" +
-                    "PLAYER: Current player's name"), false);
-
         }
     }
 }
