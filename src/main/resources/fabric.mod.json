@@ -26,11 +26,12 @@
     "FixMyGG.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.2",
-    "fabric": "*",
+    "fabricloader": ">=0.11.3",
+    "fabric": "1.17.x",
     "minecraft": "*",
-    "modmenu": ">=1.16.7",
-    "cloth-config2": ">=4.10.6"
+    "modmenu": ">=2.0.0",
+    "cloth-config2": ">=5.0.0",
+    "java": ">=16"
   },
   "custom": {
   }
