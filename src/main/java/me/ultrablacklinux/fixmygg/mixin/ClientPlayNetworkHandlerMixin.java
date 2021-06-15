@@ -7,6 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.text.Text;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,10 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin {
 
+    @Final
     @Shadow private MinecraftClient client;
     String itemSeparator = Config.get().misc.itemSeparator;
     String finalMsg = Config.get().autogg.finalMsg;
@@ -34,7 +37,7 @@ public class ClientPlayNetworkHandlerMixin {
 
         //autogg
 
-        for (String pattern : Utils.processRegex(Config.get().autogg.autoGGRegexPatterns)) {
+        for (String pattern : Objects.requireNonNull(Utils.processRegex(Config.get().autogg.autoGGRegexPatterns))) {
             if (packet.getMessage().getString().matches(pattern) && Config.get().autogg.autoGG) {
                 ArrayList<String> tmp = new ArrayList<>(Arrays.asList(Config.get().autogg.strings.split(itemSeparator)));
                 int number;
@@ -54,6 +57,7 @@ public class ClientPlayNetworkHandlerMixin {
                         try {
 
                             Thread.sleep(delayTime);
+                            assert client.player != null;
                             client.player.sendChatMessage(tmp.get(number));
                             if (!finalMsg.trim().equals("")) {
                                 client.player.sendChatMessage(finalMsg);
@@ -64,7 +68,9 @@ public class ClientPlayNetworkHandlerMixin {
                     thread.start();
                     //turn of the prevention
                     FixMyGG.skipCheck = false;
-                } catch (ArrayIndexOutOfBoundsException e) { client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected!"), false); }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    assert client.player != null;
+                    client.player.sendMessage(Text.of("§1[AutoGG] §cWrong index detected!"), false); }
             }
         }
     }
