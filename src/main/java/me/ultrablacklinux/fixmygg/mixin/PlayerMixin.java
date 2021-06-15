@@ -33,7 +33,7 @@ public abstract class PlayerMixin {
 
         //chatformatting
         ArrayList<String> variedChat = Utils.simpleStringToAL(Config.get().chatUtils.varied);
-        ArrayList<String> wideChat = Utils.simpleStringToAL(Config.get().chatUtils.varied);
+        ArrayList<String> wideChat = Utils.simpleStringToAL(Config.get().chatUtils.wide);
         ArrayList<String> fancyChat = Utils.simpleStringToAL(Config.get().chatUtils.fancy);
 
         //value: name; key: emoji

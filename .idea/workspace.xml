@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="069deb05-7f27-4d61-92f9-75bb421910d5" name="Default Changelist" comment="- gitignore boop">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/FixMyGG.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/FixMyGG.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="069deb05-7f27-4d61-92f9-75bb421910d5" name="Default Changelist" comment="-">
       <change afterPath="$PROJECT_DIR$/build/classes/java/main/FixMyGG-refmap.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/build/classes/java/main/me/ultrablacklinux/fixmygg/FixMyGG.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/build/classes/java/main/me/ultrablacklinux/fixmygg/command/FixMyGGCommand.class" afterDir="false" />
@@ -183,6 +172,8 @@
       <change afterPath="$PROJECT_DIR$/run/logs/2021-03-20-5.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/2021-03-20-6.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/2021-03-20-7.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2021-05-12-1.log.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run/logs/2021-06-15-1.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterDir="false" />
@@ -190,7 +181,6 @@
       <change afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run/mods/notenoughcrashes-3.1.8-fabric.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/saves/New World (1)/DIM-1/data/raids.dat" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/saves/New World (1)/DIM1/data/raids_end.dat" afterDir="false" />
@@ -438,11 +428,18 @@
       <change afterPath="$PROJECT_DIR$/run/servers.dat" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/servers.dat_old" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/FixMyGG.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/FixMyGG.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/ultrablacklinux/fixmygg/mixin/PlayerMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/ultrablacklinux/fixmygg/mixin/PlayerMixin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -461,11 +458,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="FixMyGG" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="FixMyGG" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -497,8 +489,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
+  </component>
   <component name="ProjectId" id="1oW9NvVIprdr25wxTAUpo5ealI1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
