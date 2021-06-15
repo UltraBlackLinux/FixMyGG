@@ -35,5 +35,31 @@ __This mod is compatible with any Version of Fabric!__
 
 
 
+# Features:
+- FixMyGG:
+    - Custom words list
+    - Custom max index and max length
+    - Toggleable notification
+
+- Emojis:
+    - Custom emoji list
+    - Custom pre- and suffix
+
+- AutoGG:
+    - Custom words list
+    - Customizable delay
+    - Custom word index (including random)
+
+- ChatUtils:
+    - Custom pre- and suffix
+    - Varied, Wide and Fancy formatting
+    - Custom Unicode and ASCII character list
+
+- Misc:
+    - AntiKarma
+    - Custom Seconday and Primary list Item separator char
+
+
+
 # Demo
 https://www.youtube.com/watch?v=UCit7VILsJ0
